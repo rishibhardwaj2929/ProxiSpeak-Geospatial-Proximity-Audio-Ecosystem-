@@ -1,0 +1,144 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #20263a;
+  background: #f3f5fa;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.topbar,
+.office-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.topbar h1 {
+  margin: 4px 0 8px;
+  font-size: clamp(32px, 5vw, 54px);
+}
+
+.topbar p,
+.office-title p {
+  color: #687087;
+  margin: 8px 0;
+}
+
+.eyebrow {
+  color: #635bdb !important;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.status,
+.online-count {
+  white-space: nowrap;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: white;
+}
+
+.status {
+  color: #b45309;
+}
+
+.status.online {
+  color: #15803d;
+}
+
+.office {
+  margin-top: 34px;
+  padding: 28px;
+  background: white;
+  border: 1px solid #e0e6f2;
+  border-radius: 22px;
+  box-shadow: 0 10px 36px #1b264010;
+}
+
+.office-title {
+  margin-bottom: 20px;
+}
+
+.office-title h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.online-count {
+  background: #f3f5fa;
+  color: #687087;
+}
+
+.online-count strong {
+  color: #20263a;
+  font-size: 20px;
+  margin-right: 8px;
+}
+.office-canvas {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid #dbe3f2;
+  border-radius: 14px;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  color: #687087;
+  font-size: 13px;
+}
+
+.controls > span:first-child {
+  font-weight: bold;
+  color: #635bdb;
+  word-spacing: 8px;
+}
+
+.coordinates {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 650px) {
+  .page {
+    padding: 20px 12px;
+  }
+
+  .office {
+    padding: 14px;
+  }
+
+  .topbar,
+  .office-title {
+    align-items: flex-start;
+  }
+
+  .topbar {
+    flex-direction: column;
+  }
+
+  .coordinates {
+    margin-left: 0;
+  }
+}
