@@ -33,6 +33,17 @@ const userSchema = new mongoose.Schema(
         type: [Number], // [x, y] coordinates in 2D space
         required: true,
         default: [0, 0],
+        validate: {
+          validator: function (val) {
+            return (
+              Array.isArray(val) &&
+              val.length === 2 &&
+              Number.isFinite(val[0]) &&
+              Number.isFinite(val[1])
+            );
+          },
+          message: 'Coordinates must be an array of two finite numbers [x, y]',
+        },
       },
     },
     isOnline: {

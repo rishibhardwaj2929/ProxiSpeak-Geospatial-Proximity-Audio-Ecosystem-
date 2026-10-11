@@ -1,8 +1,9 @@
 import { Server } from 'socket.io';
+import { registerSignalingHandlers, activeAvatars } from './signaling.js';
 
 /**
  * Initializes Socket.io server attached to the HTTP server instance.
- * Handles initial connection/disconnection handshake logging for signaling layer verification.
+ * Attaches signaling & avatar event handlers.
  * 
  * @param {import('http').Server} httpServer 
  * @returns {Server} io
@@ -15,13 +16,11 @@ export const initSocket = (httpServer) => {
     },
   });
 
-  io.on('connection', (socket) => {
-    console.log(`[Socket.io] Client connected | Socket ID: ${socket.id}`);
-
-    socket.on('disconnect', (reason) => {
-      console.log(`[Socket.io] Client disconnected | Socket ID: ${socket.id} | Reason: ${reason}`);
-    });
-  });
+  // Attach avatar movement & signaling event listeners
+  registerSignalingHandlers(io);
 
   return io;
 };
+
+export { registerSignalingHandlers, activeAvatars };
+
