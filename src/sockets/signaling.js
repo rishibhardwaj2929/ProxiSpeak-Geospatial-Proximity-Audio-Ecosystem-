@@ -36,6 +36,7 @@ export const registerSignalingHandlers = (io) => {
         const username = (payload?.username || payload?.displayName || '').trim();
         const x = payload?.x;
         const y = payload?.y;
+        const roomId = payload?.roomId && mongoose.isValidObjectId(payload.roomId) ? payload.roomId : null;
 
         // 1. Validation
         if (!username) {
@@ -63,6 +64,7 @@ export const registerSignalingHandlers = (io) => {
             user.username = username;
             user.socketId = socket.id;
             user.isOnline = true;
+            if (roomId) user.roomId = roomId;
             user.location = {
               type: 'Point',
               coordinates: [x, y],
@@ -76,6 +78,7 @@ export const registerSignalingHandlers = (io) => {
               username,
               avatarUrl: payload?.avatarUrl || '',
               socketId: socket.id,
+              roomId: roomId || null,
               isOnline: true,
               location: {
                 type: 'Point',
@@ -94,6 +97,7 @@ export const registerSignalingHandlers = (io) => {
           username,
           x,
           y,
+          roomId: user?.roomId ? user.roomId.toString() : (roomId || null),
           isOnline: true,
         };
 

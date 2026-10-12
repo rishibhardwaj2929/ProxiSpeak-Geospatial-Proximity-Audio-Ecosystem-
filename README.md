@@ -4,6 +4,101 @@ ProxiSpeak is a real-time virtual office collaboration platform built using the 
 
 ---
 
+## Day 3 / Commit 3: Rooms/Offices Management & Geospatial Proximity REST API
+
+This milestone introduces REST APIs for rooms, users, and 2D Euclidean spatial proximity queries:
+1. **Room/Office Lifecycle**: `GET /api/rooms`, `POST /api/rooms`, `GET /api/rooms/:id`, `GET /api/rooms/:id/members`.
+2. **Geospatial Proximity API**: `GET /api/users/nearby?x=...&y=...&maxDistance=100` calculates nearby active avatars with Euclidean distances and audio range flags.
+3. **User Management**: `GET /api/users` (with room and status filtering) and `GET /api/users/:id`.
+4. **Planar Geospatial Migration**: Migrated MongoDB coordinates indexing to planar Euclidean `2d` index with canvas boundary parameters.
+
+---
+
+## REST API Specification
+
+### Rooms & Virtual Offices
+
+#### `GET /api/rooms`
+Lists all virtual office rooms with active online member counts.
+- **Response `200 OK`:**
+```json
+{
+  "success": true,
+  "count": 1,
+  "data": [
+    {
+      "_id": "6acc840f5b105c5599f9c56f",
+      "name": "Main Virtual Office",
+      "description": "General open space",
+      "audioRadius": 100,
+      "dimensions": { "width": 1920, "height": 1080 },
+      "capacity": 50,
+      "activeMembersCount": 2
+    }
+  ]
+}
+```
+
+#### `POST /api/rooms`
+Creates a new virtual office room.
+- **Request Body:**
+```json
+{
+  "name": "Conference Room B",
+  "description": "Executive team meeting room",
+  "audioRadius": 120,
+  "dimensions": { "width": 1920, "height": 1080 },
+  "capacity": 25
+}
+```
+
+#### `GET /api/rooms/:id`
+Retrieves single room details and active member counts.
+
+#### `GET /api/rooms/:id/members`
+Returns all active/online avatars currently occupying the specified room.
+
+---
+
+### Geospatial Proximity & User Endpoints
+
+#### `GET /api/users/nearby`
+Calculates nearby avatars within a specified audio radius (default: 100px) in 2D Euclidean canvas space.
+- **Query Parameters:**
+  - `x` (number, required): Origin avatar X coordinate
+  - `y` (number, required): Origin avatar Y coordinate
+  - `maxDistance` or `radius` (number, optional): Maximum proximity radius (default: `100`)
+  - `roomId` (string, optional): Filter by virtual room
+  - `excludeId` (string, optional): Exclude requester's own avatar ID
+- **Response `200 OK`:**
+```json
+{
+  "success": true,
+  "origin": { "x": 100, "y": 100 },
+  "maxDistance": 100,
+  "count": 1,
+  "data": [
+    {
+      "avatarId": "6acc840f5b105c5599f9c578",
+      "username": "Bob",
+      "x": 150,
+      "y": 100,
+      "distance": 50,
+      "inAudioRange": true,
+      "isOnline": true
+    }
+  ]
+}
+```
+
+#### `GET /api/users`
+List users, optionally filtered by `roomId` and `isOnline`.
+
+#### `GET /api/users/:id`
+Get avatar state and profile by ID.
+
+---
+
 ## Commit 2: Real-Time Avatar Movement & Socket.io Broadcasting
 
 This milestone implements the real-time avatar movement synchronization layer:

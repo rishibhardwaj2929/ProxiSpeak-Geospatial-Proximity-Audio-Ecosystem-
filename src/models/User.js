@@ -46,9 +46,16 @@ const userSchema = new mongoose.Schema(
         },
       },
     },
+    roomId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Room',
+      default: null,
+      index: true,
+    },
     isOnline: {
       type: Boolean,
       default: false,
+      index: true,
     },
     socketId: {
       type: String,
@@ -60,8 +67,9 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// 2dsphere geospatial index on location to enable $near and $nearSphere spatial queries
-userSchema.index({ location: '2dsphere' });
+// Planar Euclidean 2D geospatial index for virtual office pixel coordinates
+// Set min/max bounds suitable for virtual office canvas dimensions (up to 10,000 x 10,000 px)
+userSchema.index({ 'location.coordinates': '2d' }, { min: -2000, max: 10000 });
 
 const User = mongoose.model('User', userSchema);
 
