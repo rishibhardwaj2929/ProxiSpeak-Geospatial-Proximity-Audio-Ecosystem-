@@ -1,0 +1,57 @@
+.nearby-panel {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #344256;
+  border-radius: 14px;
+  background: #1b2638;
+}
+
+.nearby-panel h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.nearby-subtitle {
+  margin: 8px 0 16px;
+  color: #b7c2d3;
+  font-size: 13px;
+}
+
+.nearby-empty {
+  color: #b7c2d3;
+  font-size: 14px;
+}
+
+.nearby-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nearby-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #111b2b;
+}
+
+.nearby-dot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.nearby-name {
+  flex: 1;
+  color: #f8fafc;
+}
+
+.nearby-distance {
+  color: #a5b4fc;
+  font-size: 12px;
+}

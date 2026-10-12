@@ -1,0 +1,101 @@
+.office-section {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.office-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.office-heading h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.office-heading p {
+  margin: 6px 0 0;
+  color: #b7c2d3;
+  font-size: 13px;
+}
+
+.people-count {
+  padding: 7px 10px;
+  border: 1px solid #46546a;
+  border-radius: 20px;
+  color: #dbeafe;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.office-map {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  border: 1px solid #46546a;
+  border-radius: 14px;
+  background-color: #172538;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.office-avatar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transform: translate(-50%, -50%);
+  transition: left 100ms linear, top 100ms linear;
+}
+
+.self-avatar {
+  left: 50%;
+  top: 65%;
+}
+
+.avatar-circle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #a5b4fc;
+  border-radius: 50%;
+  background: #6366f1;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.avatar-name {
+  max-width: 110px;
+  overflow: hidden;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.map-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #b7c2d3;
+  font-size: 14px;
+}
+
+.office-map .nearby-avatar .avatar-circle {
+    outline: 4px solid #22c55e;
+    box-shadow: 0 0 20px 8px rgba(34, 197, 94, 0.75);
+}
